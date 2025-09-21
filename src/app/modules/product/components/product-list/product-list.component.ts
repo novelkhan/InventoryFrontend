@@ -42,27 +42,32 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getAllProducts(this.selectedCategoryId, this.minPrice, this.maxPrice, this.page, this.limit).subscribe({
-      next: (response) => {
-        this.products = response.data;
-        this.totalCount = response.totalCount;
-      },
-      error: (err) => this.sharedService.showNotification(false, 'Error', err.error || 'Failed to load products')
-    });
-  }
-
-  onSearch(): void {
     if (this.searchQuery) {
-      this.productService.searchProducts(this.searchQuery).subscribe({
-        next: (data) => this.products = data,
-        error: (err) => this.sharedService.showNotification(false, 'Error', err.error || 'Failed to search products')
+      this.productService.searchProducts(this.searchQuery, this.page, this.limit).subscribe({
+        next: (response) => {
+          this.products = response.data;
+          this.totalCount = response.totalCount;
+        },
+        error: (err) => this.sharedService.showNotification(false, 'Error', err.error || 'Failed to load products')
       });
     } else {
-      this.loadProducts();
+      this.productService.getAllProducts(this.selectedCategoryId, this.minPrice, this.maxPrice, this.page, this.limit).subscribe({
+        next: (response) => {
+          this.products = response.data;
+          this.totalCount = response.totalCount;
+        },
+        error: (err) => this.sharedService.showNotification(false, 'Error', err.error || 'Failed to load products')
+      });
     }
   }
 
+  onSearch(): void {
+    this.page = 1; // সার্চ করার সময় পেজ রিসেট করা
+    this.loadProducts();
+  }
+
   onFilter(): void {
+    this.page = 1; // ফিল্টার করার সময় পেজ রিসেট করা
     this.loadProducts();
   }
 

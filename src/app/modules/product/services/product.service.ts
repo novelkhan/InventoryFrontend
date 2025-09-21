@@ -24,9 +24,12 @@ export class ProductService {
     return this.http.get<{ totalCount: number, page: number, limit: number, data: Product[] }>(this.apiUrl, { params });
   }
 
-  searchProducts(query: string): Observable<Product[]> {
-    let params = new HttpParams().set('q', query);
-    return this.http.get<Product[]>(`${this.apiUrl}/search`, { params });
+  searchProducts(query: string, page: number = 1, limit: number = 10): Observable<{ totalCount: number, page: number, limit: number, data: Product[] }> {
+    let params = new HttpParams()
+      .set('q', query)
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<{ totalCount: number, page: number, limit: number, data: Product[] }>(`${this.apiUrl}/search`, { params });
   }
 
   getProductById(id: string): Observable<Product> {

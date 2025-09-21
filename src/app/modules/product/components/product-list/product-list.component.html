@@ -1,0 +1,53 @@
+<div class="container">
+  <h2 class="text-center mb-4">Product List</h2>
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <select class="form-control" [(ngModel)]="selectedCategoryId" (change)="onFilter()">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <input type="number" class="form-control" placeholder="Min Price" [(ngModel)]="minPrice" (change)="onFilter()">
+    </div>
+    <div class="col-md-3">
+      <input type="number" class="form-control" placeholder="Max Price" [(ngModel)]="maxPrice" (change)="onFilter()">
+    </div>
+    <div class="col-md-3">
+      <input type="text" class="form-control" placeholder="Search by name/description" [(ngModel)]="searchQuery" (input)="onSearch()">
+    </div>
+  </div>
+  <button class="btn btn-primary mb-3" (click)="addProduct()">Add New Product</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ product.categoryName }}</td>
+        <td><img *ngIf="product.imageBase64" [src]="'data:image/jpeg;base64,' + product.imageBase64" alt="Product Image" width="50"></td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="editProduct(product.id)">Edit</button>
+          <button class="btn btn-sm btn-danger ml-2" (click)="deleteProduct(product.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-secondary" [disabled]="page === 1" (click)="previousPage()">Previous</button>
+    <span>Page {{ page }} of {{ totalCount / limit | number:'1.0-0' }}</span>
+    <button class="btn btn-secondary" [disabled]="page * limit >= totalCount" (click)="nextPage()">Next</button>
+  </div>
+</div>

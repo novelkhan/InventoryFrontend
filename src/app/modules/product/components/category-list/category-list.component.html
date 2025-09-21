@@ -1,0 +1,25 @@
+<div class="container">
+  <h2 class="text-center mb-4">Category List</h2>
+  <button class="btn btn-primary mb-3" (click)="addCategory()">Add New Category</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Product Count</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>{{ category.productCount }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="editCategory(category.id)">Edit</button>
+          <button class="btn btn-sm btn-danger ml-2" (click)="deleteCategory(category.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

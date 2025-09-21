@@ -15,7 +15,10 @@
                     </li>
                     <ng-container *ngIf="authService.user$ | async">
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/customer" routerLinkActive="active">Customer</a>
+                            <a class="nav-link" routerLink="/inventory/products" routerLinkActive="active">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/inventory/categories" routerLinkActive="active">Categories</a>
                         </li>
                     </ng-container>
                 </ul>

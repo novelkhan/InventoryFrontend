@@ -11,6 +11,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthorizationGuard],
     children: [
+      { path: 'inventory', loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule), canActivate: [AuthorizationGuard] },
       // { path: 'customer', component: CustomerComponent },
       // { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(module => module.AdminModule) },
       // { path: 'packages', loadChildren: () => import('./modules/package/package.module').then(module => module.PackageModule) },

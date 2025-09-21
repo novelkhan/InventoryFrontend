@@ -1,0 +1,26 @@
+.footer {
+  background-color: #343a40; // গাঢ় ধূসর ব্যাকগ্রাউন্ড
+  color: #ffffff;
+  padding: 3rem 0;
+}
+
+.hover-link:hover {
+  color: #f8d7da; // লিংকের হোভারে হালকা লালচে কালার
+  text-decoration: underline;
+}
+
+.list-unstyled li {
+  margin-bottom: 0.5rem;
+}
+
+i {
+  color: #ffffff;
+}
+
+i:hover {
+  color: #f8d7da; // সোশ্যাল আইকনের হোভারে কালার
+}
+
+.border-top {
+  border-color: #6c757d !important; // সেকেন্ডারি বর্ডার কালার
+}

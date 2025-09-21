@@ -30,8 +30,8 @@ export class ProductFormComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', Validators.maxLength(500)],
-      price: [0, Validators.required],
-      stock: [0, Validators.required],
+      price: [null, [Validators.required, Validators.min(0)]],
+      stock: [null, [Validators.required, Validators.min(0)]],
       categoryId: ['', Validators.required],
       imageBase64: [null]
     });
@@ -98,5 +98,9 @@ export class ProductFormComponent implements OnInit {
         });
       }
     }
+  }
+
+  cancel(): void {
+    this.router.navigate(['/inventory/products']);
   }
 }

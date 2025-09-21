@@ -2,38 +2,52 @@
   <h2 class="text-center mb-4">{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
   <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
     <div class="form-group">
-      <label>Name</label>
-      <input type="text" formControlName="name" class="form-control" [class.is-invalid]="productForm.get('name')?.invalid && productForm.get('name')?.touched">
-      <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">Name is required, max 100 characters</div>
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter product name" [class.is-invalid]="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+      <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
+        <div *ngIf="productForm.get('name')?.errors?.['required']">Name is required</div>
+        <div *ngIf="productForm.get('name')?.errors?.['maxlength']">Name must be less than 100 characters</div>
+      </div>
     </div>
     <div class="form-group">
-      <label>Description</label>
-      <textarea formControlName="description" class="form-control" [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched"></textarea>
-      <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">Max 500 characters</div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" placeholder="Enter product description" [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched"></textarea>
+      <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">
+        <div *ngIf="productForm.get('description')?.errors?.['maxlength']">Description must be less than 500 characters</div>
+      </div>
     </div>
     <div class="form-group">
-      <label>Price</label>
-      <input type="number" formControlName="price" class="form-control" [class.is-invalid]="productForm.get('price')?.invalid && productForm.get('price')?.touched">
-      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">Price is required</div>
+      <label for="price">Price</label>
+      <input type="number" id="price" formControlName="price" class="form-control" placeholder="Enter price" [class.is-invalid]="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
+        <div *ngIf="productForm.get('price')?.errors?.['required']">Price is required</div>
+        <div *ngIf="productForm.get('price')?.errors?.['min']">Price cannot be negative</div>
+      </div>
     </div>
     <div class="form-group">
-      <label>Stock</label>
-      <input type="number" formControlName="stock" class="form-control" [class.is-invalid]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched">
-      <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="text-danger">Stock is required</div>
+      <label for="stock">Stock</label>
+      <input type="number" id="stock" formControlName="stock" class="form-control" placeholder="Enter stock quantity" [class.is-invalid]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched">
+      <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="text-danger">
+        <div *ngIf="productForm.get('stock')?.errors?.['required']">Stock is required</div>
+        <div *ngIf="productForm.get('stock')?.errors?.['min']">Stock cannot be negative</div>
+      </div>
     </div>
     <div class="form-group">
-      <label>Category</label>
-      <select formControlName="categoryId" class="form-control" [class.is-invalid]="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
+      <label for="categoryId">Category</label>
+      <select id="categoryId" formControlName="categoryId" class="form-control" [class.is-invalid]="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
         <option value="">Select Category</option>
         <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
       </select>
       <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="text-danger">Category is required</div>
     </div>
     <div class="form-group">
-      <label>Image</label>
-      <input type="file" (change)="onFileChange($event)" class="form-control">
+      <label for="image">Image</label>
+      <input type="file" id="image" (change)="onFileChange($event)" class="form-control">
       <img *ngIf="imagePreview" [src]="imagePreview" alt="Preview" width="100" class="mt-2">
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Save</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button>
+    </div>
   </form>
 </div>

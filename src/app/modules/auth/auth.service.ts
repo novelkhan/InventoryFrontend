@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared/shared.service';
@@ -60,36 +60,35 @@ export class AuthService {
     )
   }
 
-  login(model: Login) {
-    return this.http.post<User>(`${environment.apiUrl}/api/auth/login`, model, {withCredentials: true})
-    .pipe(
-      map((user: User) => {
-        if (user) {
-          this.setUser(user);
-        }
-      })
-    );
+  login(model: any) {
+    const params = new HttpParams().set('connectionId', model.connectionId || '');
+    return this.http.post<User>(`${environment.apiUrl}/api/auth/login`, model, { params, withCredentials: true })
+      .pipe(
+        map((user: User) => {
+          if (user) {
+            this.setUser(user);
+          }
+        })
+      );
   }
 
  
 
   logout(isManualLogout: boolean = false) {
-  localStorage.removeItem(environment.userKey);
-  this.userSource.next(null);
-  this.router.navigateByUrl('/');
-  this.stopRefreshTokenTimer();
-  
-  // বিদ্যমান idle timeout ক্লিয়ার করুন
-  if (this.timeoutId) {
-    clearTimeout(this.timeoutId);
-    this.timeoutId = null;
+    localStorage.removeItem(environment.userKey);
+    this.userSource.next(null);
+    this.router.navigateByUrl('/');
+    this.stopRefreshTokenTimer();
+    
+    
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+    
+    
+    this.sharedService.closeExpiringSessionModal();
   }
-  
-  // যেকোনো খোলা session modal বন্ধ করুন
-  this.sharedService.closeExpiringSessionModal();
-  
-  // নোটিফিকেশন এখানে দেখানো হবে না, এটি ExpiringSessionCountdownComponent বা অন্য জায়গায় নিয়ন্ত্রণ করা হবে
-}
 
   register(model: Register) {
     return this.http.post(`${environment.apiUrl}/api/auth/register`, model);

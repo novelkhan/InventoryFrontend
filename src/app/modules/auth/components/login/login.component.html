@@ -29,9 +29,16 @@
                 </div>
 
                 <div class="d-grid mt-4 px-1">
-                    <button class="btn btn-lg btn-info" type="submit">Log in</button>
+                    <button class="btn btn-lg btn-info" type="submit" [disabled]="showProgress">Log in</button>
                 </div>
             </form>
+
+            <!-- রিয়েল-টাইম প্রোগ্রেস বার -->
+            <div *ngIf="showProgress" class="progress-container mt-3">
+                <div class="progress-bar" [style.width.%]="progress" [style.background]="getGradient()">
+                    <span class="progress-text">{{ progress }}%</span>
+                </div>
+            </div>
         </main>
     </div>
 </div>

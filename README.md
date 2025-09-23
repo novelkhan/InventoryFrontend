@@ -5,7 +5,7 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/novelkhan/InventoryFrontend?style=social)](https://github.com/novelkhan/InventoryFrontend)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/novelkhan/InventoryFrontend/actions)
-[![Deployed on Render](https://img.shields.io/badge/deployed_on-Render-blueviolet)](https://inventoryfrontend-jcw0.onrender.com)
+[![Deployed on Netlify](https://img.shields.io/badge/deployed_on-Netlify-00C7B7)](https://inventory3.netlify.app)
 
 A modern, responsive, and feature-rich frontend for the **E-Commerce Inventory Management System**, built with **Angular 16**. This frontend provides a seamless user experience for managing products and categories, with secure authentication, dynamic filtering, and a clean, mobile-friendly interface.
 
@@ -13,7 +13,7 @@ A modern, responsive, and feature-rich frontend for the **E-Commerce Inventory M
 
 | 🔗 **Information**           | 📍 **Details**                                                         |
 |------------------------------|-------------------------------------------------------------------------|
-| 🌐 **Live Demo**             | [View Live Application](https://inventoryfrontend-u08l.onrender.com)    |
+| 🌐 **Live Demo**             | [View Live Application](https://inventory3.netlify.app)                 |
 | 📂 **Frontend Repository**   | [GitHub Repo](https://github.com/novelkhan/InventoryFrontend.git)       |
 | 📚 **Backend Repository**    | [GitHub Repo](https://github.com/novelkhan/InventoryWebAPI.git)         |
 | 🛠️ **Issues & Contributions** | [Report Issues](https://github.com/novelkhan/InventoryFrontend/issues)  |
@@ -31,9 +31,9 @@ The **E-Commerce Inventory Management Frontend** is a full-featured Angular 16 a
 - **Modern Angular Features**: Utilizes standalone components, reactive forms, RxJS for state management, and lazy loading for optimized performance.
 - **Image Handling**: Supports product image uploads displayed as Base64-encoded images.
 - **Code Quality**: Follows Angular best practices, modular architecture, and clean code principles.
-- **Deployment**: Automated CI/CD pipeline using GitHub Actions for deployment to Render.
+- **Deployment**: Automated CI/CD pipeline using GitHub Actions for deployment to Netlify.
 
-The application is deployed on **Render** for live access, with a focus on delivering a smooth and intuitive user experience.
+The application is deployed on **Netlify** for live access, with a focus on delivering a smooth and intuitive user experience.
 
 ## Screenshots
 
@@ -94,7 +94,7 @@ To quickly test the application, use the following credentials:
 - **Modals & Notifications**: Custom Angular components for user feedback
 - **Build Tools**: Angular CLI (v16+)
 - **Version Control**: Git with GitHub
-- **Deployment**: Automated CI/CD pipeline with GitHub Actions to Render
+- **Deployment**: Automated CI/CD pipeline with GitHub Actions to Netlify
 
 ### Backend Integration
 - Connects to a .NET Core Web API backend.

@@ -90,8 +90,9 @@ export class AuthService {
     this.sharedService.closeExpiringSessionModal();
   }
 
-  register(model: Register) {
-    return this.http.post(`${environment.apiUrl}/api/auth/register`, model);
+  register(model: any) {
+    const params = new HttpParams().set('connectionId', model.connectionId || '');
+    return this.http.post(`${environment.apiUrl}/api/auth/register`, model, { params, withCredentials: true });
   }
 
   getJWT() {

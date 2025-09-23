@@ -13,11 +13,11 @@
                         [class.is-invalid]="submitted && registerForm.get('username')?.errors">
                     <label for="username">Username</label>
                     <span class="text-danger" *ngIf="submitted && registerForm.get('username')?.hasError('required')">
-                        Userame is required
+                        Username is required
                     </span>
                     <span class="text-danger"
                         *ngIf="submitted && 
-                        registerForm.get('username')?.hasError('minlength') || registerForm.get('username')?.hasError('maxlength')">
+                        (registerForm.get('username')?.hasError('minlength') || registerForm.get('username')?.hasError('maxlength'))">
                         Username must be at least 3, No Whitespace, and maximum 15 characters
                     </span>
                 </div>
@@ -32,7 +32,6 @@
                         Invalid email address
                     </span>
                 </div>
-
                 <div class="form-floating mb-3">
                     <input formControlName="password" type="password" placeholder="Password" class="form-control"
                         [class.is-invalid]="submitted && registerForm.get('password')?.errors">
@@ -42,17 +41,21 @@
                     </span>
                     <span class="text-danger"
                         *ngIf="submitted && 
-                    registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('maxlength')">
+                        (registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('maxlength'))">
                         Password must be at least 6, and maximum 15 characters
                     </span>
                 </div>
-
-                <div class="form-floatin" *ngIf="errorMessages.length > 0">
+                <div class="form-floating" *ngIf="errorMessages.length > 0">
                     <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
                 </div>
-
                 <div class="d-grid mt-4 px-1">
-                    <button class="btn btn-lg btn-info" type="submit">Create Account</button>
+                    <button class="btn btn-lg btn-info" type="submit" [disabled]="showProgress">Create Account</button>
+                </div>
+                <!-- রিয়েল-টাইম প্রোগ্রেস বার -->
+                <div *ngIf="showProgress" class="progress-container mt-3">
+                    <div class="progress-bar" [style.width.%]="progress" [style.background]="getGradient()">
+                        <span class="progress-text">{{ progress }}%</span>
+                    </div>
                 </div>
             </form>
         </main>

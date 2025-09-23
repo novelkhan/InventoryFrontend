@@ -13,7 +13,7 @@ A modern, responsive, and feature-rich frontend for the **E-Commerce Inventory M
 
 | 🔗 **Information**           | 📍 **Details**                                                         |
 |------------------------------|-------------------------------------------------------------------------|
-| 🌐 **Live Demo**             | [View Live Application](https://inventoryfrontend-jcw0.onrender.com)    |
+| 🌐 **Live Demo**             | [View Live Application](https://inventoryfrontend-u08l.onrender.com)    |
 | 📂 **Frontend Repository**   | [GitHub Repo](https://github.com/novelkhan/InventoryFrontend.git)       |
 | 📚 **Backend Repository**    | [GitHub Repo](https://github.com/novelkhan/InventoryWebAPI.git)         |
 | 🛠️ **Issues & Contributions** | [Report Issues](https://github.com/novelkhan/InventoryFrontend/issues)  |

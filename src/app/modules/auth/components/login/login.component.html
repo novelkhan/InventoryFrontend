@@ -9,7 +9,7 @@
                     <input formControlName="email" type="text" placeholder="Your email address"
                         class="form-control"
                         [class.is-invalid]="submitted && loginForm.get('email')?.errors">
-                    <label for="userName">Username (your email address)</label>
+                    <label for="userName">Email (Your email address)</label>
                     <span class="text-danger" *ngIf="submitted && loginForm.get('email')?.hasError('required')">
                         Email is required
                     </span>
@@ -17,7 +17,7 @@
 
                 <div class="form-floating mb-3">
                     <input formControlName="password" type="password" placeholder="Password" class="form-control"
-                    [class.is-invalid]="submitted && loginForm.get('userName')?.errors">
+                    [class.is-invalid]="submitted && loginForm.get('password')?.errors">
                     <label for="password">Password</label>
                     <span class="text-danger" *ngIf="submitted && loginForm.get('password')?.hasError('required')">
                         Password is required

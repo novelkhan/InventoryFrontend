@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
 import { User } from 'src/app/modules/shared/models/auth/user.model';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment.development';
+import { ProgressType } from 'src/app/modules/shared/components/progress-bar/progress-bar.component'; // নতুন যোগ করো
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   returnUrl: string | null = null;
   showProgress = false;
   progress = 0;
+  ProgressType = ProgressType; // নতুন যোগ করো (কম্পোনেন্টে ব্যবহারের জন্য)
   private hubConnection: signalR.HubConnection | null = null;
-  private isSignalRConnected = false; // নতুন যোগ করো
+  private isSignalRConnected = false;
 
   constructor(
     private authService: AuthService,
@@ -62,9 +64,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   private initSignalR(): void {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${environment.apiUrl}/progressHub`, {
-        withCredentials: true // কুকি সাপোর্ট করো
+        withCredentials: true
       })
-      .withAutomaticReconnect() // স্বয়ংক্রিয় রিকানেক্ট
+      .withAutomaticReconnect()
       .build();
 
     this.hubConnection.start()
@@ -74,8 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         console.error('SignalR Connection Error: ', err);
-        // রিট্রাই লজিক
-        setTimeout(() => this.initSignalR(), 5000); // ৫ সেকেন্ড পর আবার চেষ্টা
+        setTimeout(() => this.initSignalR(), 5000);
       });
 
     this.hubConnection.on('ReceiveProgress', (progress: number) => {
@@ -119,7 +120,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       const connectionId = this.hubConnection.connectionId || '';
       const model = {
         ...this.loginForm.value,
-        connectionId // কুয়েরি প্যারামিটার হিসেবে পাঠাও
+        connectionId
       };
 
       this.authService.login(model).subscribe({
@@ -141,9 +142,5 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       });
     }
-  }
-
-  getGradient(): string {
-    return `linear-gradient(90deg, #00b4db ${this.progress - 20}%, #0083b0 ${this.progress}%)`;
   }
 }

@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/modules/shared/shared.service';
 import { User } from 'src/app/modules/shared/models/auth/user.model';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment.development';
+import { ProgressType } from 'src/app/modules/shared/components/progress-bar/progress-bar.component'; // নতুন যোগ করো
 
 @Component({
   selector: 'app-register',
@@ -18,10 +19,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup = new FormGroup({});
   submitted = false;
   errorMessages: string[] = [];
-  showProgress = false; // নতুন যোগ করো
-  progress = 0; // নতুন যোগ করো
-  private hubConnection: signalR.HubConnection | null = null; // নতুন যোগ করো
-  private isSignalRConnected = false; // নতুন যোগ করো
+  showProgress = false;
+  progress = 0;
+  ProgressType = ProgressType; // নতুন যোগ করো
+  private hubConnection: signalR.HubConnection | null = null;
+  private isSignalRConnected = false;
 
   constructor(
     private authService: AuthService,
@@ -52,9 +54,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private initSignalR(): void {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${environment.apiUrl}/progressHub`, {
-        withCredentials: true // কুকি সাপোর্ট
+        withCredentials: true
       })
-      .withAutomaticReconnect() // স্বয়ংক্রিয় রিকানেক্ট
+      .withAutomaticReconnect()
       .build();
 
     this.hubConnection.start()
@@ -64,7 +66,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         console.error('SignalR Connection Error: ', err);
-        setTimeout(() => this.initSignalR(), 5000); // ৫ সেকেন্ড পর রিট্রাই
+        setTimeout(() => this.initSignalR(), 5000);
       });
 
     this.hubConnection.on('ReceiveProgress', (progress: number) => {
@@ -109,7 +111,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const connectionId = this.hubConnection.connectionId || '';
       const model = {
         ...this.registerForm.value,
-        connectionId // কুয়েরি প্যারামিটার হিসেবে পাঠাও
+        connectionId
       };
 
       this.authService.register(model).subscribe({
@@ -119,6 +121,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('/auth/login');
         },
         error: error => {
+          console.log(error);
           this.showProgress = false;
           if (error.error.errors) {
             this.errorMessages = error.error.errors;
@@ -128,9 +131,5 @@ export class RegisterComponent implements OnInit, OnDestroy {
         }
       });
     }
-  }
-
-  getGradient(): string {
-    return `linear-gradient(90deg, #00b4db ${this.progress - 20}%, #0083b0 ${this.progress}%)`;
   }
 }

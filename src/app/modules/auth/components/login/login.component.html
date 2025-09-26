@@ -28,17 +28,13 @@
                     <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
                 </div>
 
-                <div class="d-grid mt-4 px-1">
+                <div class="d-grid mt-4 mb-3 px-1">
                     <button class="btn btn-lg btn-info" type="submit" [disabled]="showProgress">Log in</button>
                 </div>
             </form>
 
-            <!-- রিয়েল-টাইম প্রোগ্রেস বার -->
-            <div *ngIf="showProgress" class="progress-container mt-3">
-                <div class="progress-bar" [style.width.%]="progress" [style.background]="getGradient()">
-                    <span class="progress-text">{{ progress }}%</span>
-                </div>
-            </div>
+            <!-- রিইউজেবল প্রোগ্রেস বার -->
+            <app-progress-bar *ngIf="showProgress" [progress]="progress" [showText]="true" [type]="ProgressType.Linear" [speed]="500" [color]="'primary'" [autoHide]="true"></app-progress-bar>
         </main>
     </div>
 </div>

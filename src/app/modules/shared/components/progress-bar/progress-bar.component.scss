@@ -1,0 +1,73 @@
+.progress-wrapper {
+  position: relative;
+}
+
+.progress-container {
+  height: 30px;
+  background-color: #e9ecef;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  .progress-bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 50px;
+    animation: glow 1.5s infinite alternate;
+    transition: width 0.5s ease-in-out;
+
+    .progress-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+  }
+}
+
+.circular-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .progress-ring {
+    transform: rotate(-90deg);
+
+    .progress-ring-circle {
+      stroke-dasharray: 327; // 2 * π * r (r=52)
+      stroke-dashoffset: 327;
+      transition: stroke-dashoffset 0.5s ease-in-out;
+      animation: rotate 2s linear infinite;
+    }
+
+    .progress-ring-text {
+      font-size: 1.2rem;
+      font-weight: bold;
+      fill: #007bff;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

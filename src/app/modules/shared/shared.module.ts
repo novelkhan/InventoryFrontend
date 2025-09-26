@@ -7,6 +7,7 @@ import { ExpiringSessionCountdownComponent } from './components/modals/expiring-
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 
 
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     NotFoundComponent,
     ValidationMessagesComponent,
     NotificationComponent,
-    ExpiringSessionCountdownComponent
+    ExpiringSessionCountdownComponent,
+    ProgressBarComponent
   ],
   imports: [
     CommonModule
@@ -26,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ValidationMessagesComponent,
     NotificationComponent,
-    ExpiringSessionCountdownComponent
+    ExpiringSessionCountdownComponent,
+    ProgressBarComponent
   ]
 })
 export class SharedModule { }

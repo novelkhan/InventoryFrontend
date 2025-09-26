@@ -1,0 +1,17 @@
+<div class="progress-wrapper" [class.circular]="type === ProgressType.Circular">
+  <!-- লিনিয়ার প্রোগ্রেস বার -->
+  <div *ngIf="type === ProgressType.Linear" class="progress-container">
+    <div class="progress-bar" [style.width.%]="progress" [style.background]="getProgressColor()" [style.transition-duration.ms]="speed">
+      <span *ngIf="showText" class="progress-text">{{ progress }}%</span>
+    </div>
+  </div>
+
+  <!-- সার্কুলার প্রোগ্রেস বার -->
+  <div *ngIf="type === ProgressType.Circular" class="circular-progress">
+    <svg class="progress-ring" width="120" height="120">
+      <circle class="progress-ring-circle" stroke="currentColor" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"
+              [style.stroke-dasharray]="circumference" [style.stroke-dashoffset]="dashOffset" />
+      <text *ngIf="showText" class="progress-ring-text" x="60" y="60" text-anchor="middle">{{ progress }}%</text>
+    </svg>
+  </div>
+</div>

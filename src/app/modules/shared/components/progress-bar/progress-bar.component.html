@@ -1,17 +1,33 @@
-<div class="progress-wrapper" [class.circular]="type === ProgressType.Circular">
+<div class="progress-wrapper" [class]="color">
   <!-- লিনিয়ার প্রোগ্রেস বার -->
   <div *ngIf="type === ProgressType.Linear" class="progress-container">
-    <div class="progress-bar" [style.width.%]="progress" [style.background]="getProgressColor()" [style.transition-duration.ms]="speed">
+    <div class="progress-bar" 
+         [style.width.%]="progress" 
+         [style.background]="getProgressColor()" 
+         [style.transition-duration.ms]="speed">
       <span *ngIf="showText" class="progress-text">{{ progress }}%</span>
     </div>
   </div>
 
   <!-- সার্কুলার প্রোগ্রেস বার -->
   <div *ngIf="type === ProgressType.Circular" class="circular-progress">
-    <svg class="progress-ring" width="120" height="120">
-      <circle class="progress-ring-circle" stroke="currentColor" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"
-              [style.stroke-dasharray]="circumference" [style.stroke-dashoffset]="dashOffset" />
-      <text *ngIf="showText" class="progress-ring-text" x="60" y="60" text-anchor="middle">{{ progress }}%</text>
-    </svg>
+    <div class="progress-ring">
+      <svg>
+        <!-- ব্যাকগ্রাউন্ড সার্কেল -->
+        <circle class="progress-ring-background" 
+                cx="60" cy="60" r="52" />
+        
+        <!-- প্রোগ্রেস সার্কেল -->
+        <circle class="progress-ring-circle" 
+                cx="60" cy="60" r="52"
+                [attr.stroke-dasharray]="circumference"
+                [attr.stroke-dashoffset]="dashOffset" />
+        
+        <!-- টেক্সট -->
+        <text *ngIf="showText" x="60" y="60" text-anchor="middle" dominant-baseline="middle">
+          {{ progress }}%
+        </text>
+      </svg>
+    </div>
   </div>
 </div>

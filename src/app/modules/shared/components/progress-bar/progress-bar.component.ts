@@ -11,22 +11,23 @@ export enum ProgressType {
   styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent implements OnChanges {
-  @Input() progress: number = 0; // 0-100
-  @Input() showText: boolean = true; // টেক্সট দেখাবে কিনা
-  @Input() type: ProgressType = ProgressType.Linear; // লিনিয়ার বা সার্কুলার
-  @Input() speed: number = 500; // অ্যানিমেশন স্পিড (ms)
-  @Input() color: string = 'primary'; // কালার থিম (primary, success, warning, danger)
-  @Input() autoHide: boolean = true; // 100% হলে লুকিয়ে যাবে কিনা
+  @Input() progress: number = 0;
+  @Input() showText: boolean = true;
+  @Input() type: ProgressType = ProgressType.Linear;
+  @Input() speed: number = 500;
+  @Input() color: string = 'primary';
+  @Input() autoHide: boolean = true;
 
-  @Output() progressComplete = new EventEmitter<void>(); // কমপ্লিট হলে ইমিট
+  @Output() progressComplete = new EventEmitter<void>();
 
-  ProgressType = ProgressType; // টেমপ্লেটে ব্যবহারের জন্য
+  ProgressType = ProgressType;
 
-  private radius = 52; // সার্কেলের রেডিয়াস
-  circumference = 2 * Math.PI * this.radius; // সার্কেলের পরিধি
+  private radius = 52;
+  circumference = 2 * Math.PI * this.radius;
 
   get dashOffset(): number {
-    return this.circumference - (this.progress / 100) * this.circumference;
+    const progressOffset = (this.progress / 100) * this.circumference;
+    return this.circumference - progressOffset;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

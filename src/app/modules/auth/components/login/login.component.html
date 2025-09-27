@@ -34,7 +34,10 @@
             </form>
 
             <!-- রিইউজেবল প্রোগ্রেস বার -->
-            <app-progress-bar *ngIf="showProgress" [progress]="progress" [showText]="true" [type]="ProgressType.Linear" [speed]="500" [color]="'primary'" [autoHide]="true"></app-progress-bar>
+            <!-- <app-progress-bar *ngIf="showProgress" [progress]="progress" [showText]="true" [type]="ProgressType.Linear" [speed]="500" [color]="'primary'" [autoHide]="true"></app-progress-bar> -->
+
+            <!-- সার্কুলার প্রোগ্রেস বার -->
+            <app-progress-bar *ngIf="showProgress" [progress]="progress" [showText]="true" [type]="ProgressType.Circular" [speed]="500" [color]="'primary'" [autoHide]="true"></app-progress-bar>
         </main>
     </div>
 </div>

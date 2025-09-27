@@ -1,8 +1,13 @@
 .progress-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
 .progress-container {
+  width: 100%;
   height: 30px;
   background-color: #e9ecef;
   border-radius: 50px;
@@ -45,29 +50,70 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   .progress-ring {
-    transform: rotate(-90deg);
+    position: relative;
+    width: 120px;
+    height: 120px;
 
-    .progress-ring-circle {
-      stroke-dasharray: 327; // 2 * π * r (r=52)
-      stroke-dashoffset: 327;
-      transition: stroke-dashoffset 0.5s ease-in-out;
-      animation: rotate 2s linear infinite;
-    }
+    svg {
+      width: 100%;
+      height: 100%;
+      
+      circle {
+        transition: stroke-dashoffset 0.5s ease-in-out;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
 
-    .progress-ring-text {
-      font-size: 1.2rem;
-      font-weight: bold;
-      fill: #007bff;
-      text-anchor: middle;
-      dominant-baseline: middle;
+      .progress-ring-background {
+        stroke: #e9ecef;
+        stroke-width: 8;
+        fill: transparent;
+      }
+
+      .progress-ring-circle {
+        stroke: currentColor;
+        stroke-width: 8;
+        fill: transparent;
+        stroke-linecap: round;
+      }
+
+      text {
+        font-size: 1.2rem;
+        font-weight: bold;
+        fill: #007bff;
+        text-anchor: middle;
+        dominant-baseline: middle;
+      }
     }
   }
 }
 
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
+// কালার ভ্যারিয়েন্টস
+:host {
+  &.primary {
+    .progress-ring-circle {
+      stroke: #007bff;
+    }
+  }
+  
+  &.success {
+    .progress-ring-circle {
+      stroke: #28a745;
+    }
+  }
+  
+  &.warning {
+    .progress-ring-circle {
+      stroke: #ffc107;
+    }
+  }
+  
+  &.danger {
+    .progress-ring-circle {
+      stroke: #dc3545;
+    }
   }
 }
